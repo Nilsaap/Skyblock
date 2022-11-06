@@ -1,6 +1,10 @@
 <script lang="ts">
-	let name = '';
+	let name: any;
+
+    function updateName(e:any){
+        name = e.target.value;
+    }
 </script>
 
-<input bind:value={name} placeholder="enter your name">
+<input type="text" on:input={updateName}/>
 <p>Hello {name}!</p>
