@@ -1,9 +1,10 @@
 <script lang="ts">
   import { debug } from 'svelte/internal';
   import type { PageData } from './$types';
-
+  
   export let data: PageData;
-  console.log(data);
+  const userData = data.profile.members[data.uuid];
+  console.log(userData);
 </script>
 
-<h1>{data.id}</h1>
+{data.skillData[1]}
