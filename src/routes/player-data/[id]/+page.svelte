@@ -4,7 +4,6 @@
   
   export let data: PageData;
   const userData = data.profile.members[data.uuid];
-  console.log(userData);
+  const skillData = data.skillData;
+  console.log(skillData);
 </script>
-
-{data.skillData[1]}
