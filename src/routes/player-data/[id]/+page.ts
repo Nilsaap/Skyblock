@@ -3,9 +3,8 @@ import type { PageLoad } from "./$types";
 const hypixelApiURL = "https://api.hypixel.net";
 const mojangApiURL = "https://api.ashcon.app/mojang/v2";
 const hypixelApiKey = "b459115c-9a12-486a-9bed-80dca5b5e198";
-const hypixelSkillUrl = "https://api.hypixel.net/resources/skyblock/skills";
-let skillLevels: any[11];
-let xpReqiurments: any[60] = [];
+//const hypixelSkillUrl = "https://api.hypixel.net/resources/skyblock/skills";
+let skillLevels: any[11] = [11];
 
 export const load: PageLoad = async ({ params, fetch }) => {
   //Gest the uuid of the player
@@ -28,9 +27,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
   }
 
   //Skill Data Api Call
-  const skillResp = await fetch(hypixelSkillUrl);
-  const skillJson = await skillResp.json();
+
+  //const skillResp = await fetch(hypixelSkillUrl);
+  //const skillJson = await skillResp.json();
+
   //Skill Exp to Level Calculation
+  /*
   for(let i = 0; i < 50; i++) {
     xpReqiurments[i] = skillJson.skills.FARMING.levels[i].totalExpRequired;
   }
@@ -42,7 +44,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
         }
         else{ break; }
       }
-      /*
       else if(j = 1){
         if(selectedProfile.members[uuid].experience_skill_mining < xpReqiurments[j]){
           skillLevels[i] = j;
@@ -71,12 +72,16 @@ export const load: PageLoad = async ({ params, fetch }) => {
           skillLevels[i] = j;
         }
       }
-      */
+      
     }
   }
+  */
+  skillLevels[0] = (Math.sqrt((2 * selectedProfile.experience_skill_farming) + 30625) / 50) - 2.5;
+  console.log(selectedProfile.experience_skill_farming);
+  console.log((Math.sqrt((2 * selectedProfile.experience_skill_farming) + 30625) / 50) - 2.5);
   const skillData: any[] = await skillLevels;
   
-  return { uuid: uuid, profile: selectedProfile, skillData: skillData};
+  return { uuid: uuid, profile: selectedProfile, skillData: skillLevels};
 };
 
 export const prerender = false;
